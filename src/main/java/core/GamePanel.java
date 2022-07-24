@@ -1,7 +1,7 @@
-package paquin.tilegame.main;
+package core;
 
-import paquin.entity.Player;
-import paquin.tiles.TileManager;
+import entity.Player;
+import tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;

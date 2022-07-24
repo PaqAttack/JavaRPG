@@ -1,4 +1,4 @@
-package paquin.tilegame.main;
+package core;
 
 public enum WorldVar {
     MAX_WORLD_COL(50),

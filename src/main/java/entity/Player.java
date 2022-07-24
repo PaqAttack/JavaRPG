@@ -1,8 +1,7 @@
-package paquin.entity;
+package entity;
 
-import paquin.tilegame.main.GamePanel;
-import paquin.tilegame.main.KeyHandler;
-import paquin.tilegame.main.ScreenVar;
+import core.KeyHandler;
+import core.ScreenVar;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

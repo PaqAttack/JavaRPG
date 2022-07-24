@@ -1,4 +1,4 @@
-package paquin.tilegame.main;
+package core;
 
 import javax.swing.*;
 

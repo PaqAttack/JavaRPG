@@ -1,4 +1,4 @@
-package paquin.tilegame.main;
+package core;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

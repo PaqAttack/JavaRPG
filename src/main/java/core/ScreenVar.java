@@ -1,4 +1,4 @@
-package paquin.tilegame.main;
+package core;
 
 public enum ScreenVar {
     ORIG_TILE_SIZE(16),

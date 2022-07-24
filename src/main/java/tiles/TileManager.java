@@ -1,8 +1,8 @@
-package paquin.tiles;
+package tiles;
 
-import paquin.entity.Player;
-import paquin.tilegame.main.ScreenVar;
-import paquin.tilegame.main.WorldVar;
+import core.ScreenVar;
+import core.WorldVar;
+import entity.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
