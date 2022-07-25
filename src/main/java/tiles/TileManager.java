@@ -23,6 +23,7 @@ public class TileManager {
     private int[][] map;
 
     private Player player;
+
     /**
      * Constructs a Tile Manager.
      */
@@ -68,6 +69,7 @@ public class TileManager {
 
     /**
      * Loads a new map from the text file passed in.
+     *
      * @param levelPath String containing the file path for the level to load.
      */
     public void loadMap(String levelPath) {
@@ -101,10 +103,10 @@ public class TileManager {
                 // When a row has been completed move to the next one.
                 row++;
             }
-
             // Close input stream and buffered reader.
             is.close();
             br.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,6 +114,7 @@ public class TileManager {
 
     /**
      * Render tiles on the screen by matching the value of each map location with a tile index.
+     *
      * @param g2 2D Graphics Object
      */
     public void render(Graphics2D g2) {
@@ -129,13 +132,21 @@ public class TileManager {
 
                 // If tile is visible on screen then render it.
                 if (worldX + tileSize > player.getWorldX() - player.getScreenX() &&
-                    worldX - tileSize < player.getWorldX() + player.getScreenX() &&
-                    worldY + tileSize > player.getWorldY() - player.getScreenY() &&
-                    worldY - tileSize < player.getWorldY() + player.getScreenY()) {
+                        worldX - tileSize < player.getWorldX() + player.getScreenX() &&
+                        worldY + tileSize > player.getWorldY() - player.getScreenY() &&
+                        worldY - tileSize < player.getWorldY() + player.getScreenY()) {
 
                     g2.drawImage(tile[tileID].getImage(), screenX, screenY, tileSize, tileSize, null);
                 }
             }
         }
+    }
+
+    public int[][] getMap() {
+        return map;
+    }
+
+    public Tile getTileByIndex(int index) {
+        return tile[index];
     }
 }

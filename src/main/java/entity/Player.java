@@ -1,5 +1,6 @@
 package entity;
 
+import core.GamePanel;
 import core.KeyHandler;
 import core.ScreenVar;
 
@@ -15,7 +16,8 @@ import java.util.Objects;
  */
 public class Player extends Entity {
     // Toying with leaving this here but likely to move it as all keyboard input is player input.
-    KeyHandler keyHandler;
+    private KeyHandler keyHandler;
+    private GamePanel gamePanel;
 
     // These will determine where the player is displayed.
     public final int screenX;
@@ -29,9 +31,10 @@ public class Player extends Entity {
      * @param startY     Starting Position Y value
      * @param speed      speed of the player.
      */
-    public Player(KeyHandler keyHandler, int startX, int startY, int speed) {
+    public Player(GamePanel gamePanel, KeyHandler keyHandler, int startX, int startY, int speed) {
         super(startX, startY, speed);
         this.keyHandler = keyHandler;
+        this.gamePanel = gamePanel;
 
         screenX = (ScreenVar.SCREEN_WIDTH.getValue() / 2) - (ScreenVar.TILE_SIZE.getValue()/ 2);
         screenY = (ScreenVar.SCREEN_HEIGHT.getValue() / 2) - (ScreenVar.TILE_SIZE.getValue() / 2);
@@ -40,8 +43,8 @@ public class Player extends Entity {
         getPlayerImage();
 
         // Collision detection area of the player area.
-        int boundsX = screenX + (3 * ScreenVar.SCALE.getValue());
-        int boundsY = screenY + (10 * ScreenVar.SCALE.getValue());
+        int boundsX = 3 * ScreenVar.SCALE.getValue();
+        int boundsY = 10 * ScreenVar.SCALE.getValue();
         int boundsW = ScreenVar.TILE_SIZE.getValue() - (3 * ScreenVar.SCALE.getValue() * 2);
         int boundsH = ScreenVar.TILE_SIZE.getValue() - (10 * ScreenVar.SCALE.getValue());
 
@@ -97,19 +100,29 @@ public class Player extends Entity {
         if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.rightPressed || keyHandler.leftPressed) {
             if (keyHandler.upPressed) {
                 direction = Direction.UP;
-                worldY -= getSpeed() * deltaTime;
             }
             if (keyHandler.downPressed) {
                 direction = Direction.DOWN;
-                worldY += getSpeed() * deltaTime;
             }
             if (keyHandler.rightPressed) {
                 direction = Direction.RIGHT;
-                worldX += getSpeed() * deltaTime;
             }
             if (keyHandler.leftPressed) {
                 direction = Direction.LEFT;
-                worldX -= getSpeed() * deltaTime;
+            }
+
+            // Collision Checking
+            collisionHappening = false;
+            gamePanel.getCollisionChecker().checkTile(this);
+
+            // If no collision is happening then move. Otherwise, nope!
+            if (!collisionHappening) {
+                switch (direction) {
+                    case UP -> worldY -= getSpeed() * deltaTime;
+                    case DOWN -> worldY += getSpeed() * deltaTime;
+                    case LEFT -> worldX -= getSpeed() * deltaTime;
+                    case RIGHT -> worldX += getSpeed() * deltaTime;
+                }
             }
 
             updateSpriteCounter();

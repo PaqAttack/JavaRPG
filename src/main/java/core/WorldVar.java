@@ -1,8 +1,8 @@
 package core;
 
 public enum WorldVar {
-    MAX_WORLD_COL(50),
-    MAX_WORLD_ROW(50),
+    MAX_WORLD_COL(100),
+    MAX_WORLD_ROW(100),
     MAX_WORLD_WIDTH(worldWidth()),
     MAX_WORLD_HEIGHT(worldHeight());
 

@@ -11,6 +11,7 @@ public class GamePanel extends JPanel implements Runnable {
     private KeyHandler keyHandler = new KeyHandler();
     private TileManager tileManager;
     private Player player;
+    private CollisionChecker collisionChecker;
 
     // Create and setup game panel object
     public GamePanel() {
@@ -25,10 +26,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     private void createInitialGameObjects() {
         // Create the player
-        player = new Player(keyHandler, 100, 100, 200);
+        int startTileRow = ScreenVar.TILE_SIZE.getValue() * 5;
+        int startTileCol = ScreenVar.TILE_SIZE.getValue() * 5;
+        player = new Player(this, keyHandler, startTileCol, startTileRow, 200);
 
         // Creates the Tile Manager
         tileManager = new TileManager(player);
+
+        // Creates Collision Checker
+        collisionChecker = new CollisionChecker(this);
     }
 
     /**
@@ -112,9 +118,22 @@ public class GamePanel extends JPanel implements Runnable {
         // Cast Graphics object to Graphics2D for additional capabilities.
         Graphics2D g2 = (Graphics2D) g;
 
-        tileManager.render(g2);
-        player.render(g2);
 
-        g2.dispose();
+        try {
+            tileManager.render(g2);
+            player.render(g2);
+        } finally {
+            g2.dispose();
+        }
+
+
+    }
+
+    public CollisionChecker getCollisionChecker() {
+        return collisionChecker;
+    }
+
+    public TileManager getTileManager() {
+        return tileManager;
     }
 }

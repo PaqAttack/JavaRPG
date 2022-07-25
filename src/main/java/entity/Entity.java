@@ -21,7 +21,8 @@ public class Entity {
 
     // Collision Detection Details
     protected Rectangle collisionBounds;
-    protected boolean collisionOn = true;
+    protected boolean collisionHappening = false;
+    public final static int CollisionCheckDistance = 4;
 
     // Sprite management Variables
     protected int spriteCounter = 0;       // Counts up to Duration every frame.
@@ -65,5 +66,33 @@ public class Entity {
      */
     public int getSpeed() {
         return speed;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public int getCollisionBoundsX() {
+        return (int) Math.round(collisionBounds.getX());
+    }
+
+    public int getCollisionBoundsY() {
+        return (int) Math.round(collisionBounds.getY());
+    }
+
+    public int getCollisionBoundsHeight() {
+        return (int) Math.round(collisionBounds.getHeight());
+    }
+
+    public int getCollisionBoundsWidth() {
+        return (int) Math.round(collisionBounds.getWidth());
+    }
+
+    public boolean isCollisionHappening() {
+        return collisionHappening;
+    }
+
+    public void setCollisionHappening(boolean collisionHappening) {
+        this.collisionHappening = collisionHappening;
     }
 }
