@@ -24,4 +24,20 @@ public class Obstacle {
         this.x = x;
         this.y = y;
     }
+
+    public int getHeight() {
+        return (int) Math.round(height);
+    }
+
+    public int getWidth() {
+        return (int) Math.round(width);
+    }
+
+    public int getX() {
+        return (int) Math.round(x);
+    }
+
+    public int getY() {
+        return (int) Math.round(y);
+    }
 }

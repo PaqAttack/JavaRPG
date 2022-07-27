@@ -21,4 +21,28 @@ public class Map {
         this.height = height;
         this.width = width;
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getTileheight() {
+        return tileheight;
+    }
+
+    public int getTilewidth() {
+        return tilewidth;
+    }
+
+    public Layer[] getLayers() {
+        return layers;
+    }
+
+    public TileSet[] getTilesets() {
+        return tilesets;
+    }
 }

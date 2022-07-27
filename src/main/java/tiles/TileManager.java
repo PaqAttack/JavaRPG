@@ -3,113 +3,149 @@ package tiles;
 import core.ScreenVar;
 import core.WorldVar;
 import entity.Player;
+import map.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.BufferedReader;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class TileManager {
-    // This tracks the number of tiles set up in the game
-    private final int NUM_OF_TILES = 4;
-
     // This array will hold all tiles.
-    private final Tile[] tile;
+    private ArrayList<Tile> tiles;
 
     // This will store the currently loaded map.
-    private int[][] map;
+    private final Map map;
 
-    private Player player;
+    private ArrayList<Rectangle> obstacles = new ArrayList<>();
+
+    // Hold a reference to the player
+    private final Player player;
+
+    private int tileID = 0;
+    private int worldX = 0;
+    private int worldY = 0;
+    private int screenX = 0;
+    private int screenY = 0;
+    private int tileSize;
+
+    // Temp Location for map file names
+    String myFile = "/JSON maps/TestMapwObstacles.json";
+    BufferedImage curScreen;
+
 
     /**
      * Constructs a Tile Manager.
      */
-    public TileManager(Player player) {
+    public TileManager(Player player){
         this.player = player;
 
         // Initialize arrays.
-        tile = new Tile[NUM_OF_TILES];
-        map = new int[WorldVar.MAX_WORLD_COL.getValue()][WorldVar.MAX_WORLD_ROW.getValue()];
+        tiles = new ArrayList<>();
 
-        // Load Tile Images
-        getTileImage();
+        // Load JSON File
+        MapLoader maploader = new MapLoader(myFile);
+        map = maploader.getMap();
 
-        // Levels available to load.
-        String level01 = "/maps/Level 1.txt";
-        String level02 = "/maps/Level 2.txt";
+        tileSize = map.getTilewidth() * ScreenVar.SCALE.getValue();
 
-        // Loads level into map.
-        loadMap(level02);
-    }
-
-    /**
-     * Creates tile objects and loads their data.
-     */
-    public void getTileImage() {
-        try {
-            // BLANK
-            tile[0] = new Tile(false, ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/BLANK.png"))));
-
-            // DIRT
-            tile[1] = new Tile(false, ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/dirt.png"))));
-
-            // GRASS
-            tile[2] = new Tile(true, ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png"))));
-
-            // WATER
-            tile[3] = new Tile(false, ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png"))));
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        // GSON imports my data as a 1D array and it would be much better if it were 2D so lets fix that.
+        for (Layer layer : map.getLayers()) {
+            layer.processDataArray();
         }
+
+        // Build collision Array
+        buildCollisionAreas();
+
+        // Cut Up Sprite Sheet and create a lot of Tiles.
+        loadSpriteSheets();
+
+        // Bake tiles into single image
+        bakeTiles();
     }
 
-    /**
-     * Loads a new map from the text file passed in.
-     *
-     * @param levelPath String containing the file path for the level to load.
-     */
-    public void loadMap(String levelPath) {
-        int row = 0;
-
-        try {
-            InputStream is = getClass().getResourceAsStream(levelPath);
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-            // Reads data from text file. The quanity of data is unknown and up to the set max world row/colum data will be read.
-            while (row < WorldVar.MAX_WORLD_ROW.getValue()) {
-                // Moves the next line of text from the Buffered reader to the Line string.
-                String line = br.readLine();
-
-                // If this line is null then the end of the file has been reached and the while loop is broken.
-                if (line == null) {
-                    break;
+    private void buildCollisionAreas() {
+        for (Layer layer : map.getLayers()) {
+            if (layer.getName().equalsIgnoreCase("Collision")) {
+                for (Obstacle obs : layer.getObjects()) {
+                    obstacles.add(new Rectangle(obs.getX(), obs.getY(), obs.getWidth(), obs.getHeight()));
                 }
-
-                // split up the line and add each value to the "numbers" array
-                String[] numbers = line.split(" ");
-
-                // Store the quanity of entries in the "numbers" array for iteration.
-                int columns = numbers.length;
-
-                // Iterate through the "numbers" array until there is no more data or the max size of the world is reached. Extra data is ignored.
-                for (int col = 0; col < Math.min(columns, WorldVar.MAX_WORLD_COL.getValue()); col++) {
-                    // Set the map value for the appropriate location to be the value read in. This value matches the tile index.
-                    map[col][row] = Integer.parseInt(numbers[col]);
-                }
-                // When a row has been completed move to the next one.
-                row++;
             }
-            // Close input stream and buffered reader.
-            is.close();
-            br.close();
+        }
+    }
 
-        } catch (Exception e) {
+    private void loadSpriteSheets() {
+        int tileWidth = map.getTilewidth();
+        int tileHeight = map.getTileheight();
+
+        int maxIndex = getMaxIndex();
+        for (int x = 0; x <= maxIndex; x++) {
+            tiles.add(null);
+        }
+
+        try {
+
+            // Cycle through each tileset to load all tiles.
+            for (TileSet ts : map.getTilesets()) {
+                // Set index starting point to first global ID from JSON
+                int curID = ts.getFirstgid();
+
+                // Get tilesheet image
+                BufferedImage img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ts.getSource())));
+
+                // Determine rows and column based on image size divided by tile size
+                int cols = img.getWidth() / tileWidth;
+                int rows = img.getHeight() / tileHeight;
+
+                // cut up sprite sheet starting at top left and processing the image like reading a book.
+                for (int y = 0; y < rows; y++) {
+                    for (int x = 0; x < cols; x++) {
+                        // Add each item to its predefined index in tiles array. This will eliminate the need to search for tile IDs later when rendering.
+                        tiles.add(curID,
+                                new Tile(
+                                        scaleImage(img.getSubimage(x * tileWidth, y * tileHeight, tileWidth, tileHeight),
+                                                ScreenVar.TILE_SIZE.getValue(),
+                                                ScreenVar.TILE_SIZE.getValue())));
+                        curID++;
+                    }
+                }
+
+            }
+
+        } catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    private BufferedImage bakeTiles() {
+
+
+
+
+        return null;
+    }
+
+    private BufferedImage scaleImage(BufferedImage orig, int width, int height) {
+        BufferedImage scaledImg = new BufferedImage(width, height, orig.getType());
+        Graphics2D g2 = scaledImg.createGraphics();
+        g2.drawImage(orig, 0, 0, width, height, null);
+        g2.dispose();
+        return scaledImg;
+    }
+
+
+    private int getMaxIndex() {
+        int max = 0;
+        for (Layer layer : getMap().getLayers()) {
+            if (layer.getMapData() != null) {
+                for (int index : layer.getData()) {
+                    max = Math.max(index, max);
+                }
+            }
+        }
+        return max;
     }
 
     /**
@@ -118,35 +154,47 @@ public class TileManager {
      * @param g2 2D Graphics Object
      */
     public void render(Graphics2D g2) {
-        int tileSize = ScreenVar.TILE_SIZE.getValue();
+        // DEBUG
+        long start = System.nanoTime();
 
+        for (Layer layer : getMap().getLayers()) {
 
-        for (int x = 0; x < WorldVar.MAX_WORLD_COL.getValue(); x++) {
-            for (int y = 0; y < WorldVar.MAX_WORLD_ROW.getValue(); y++) {
-                int tileID = map[x][y];
+            if (layer.getData() != null) {
 
-                int worldX = x * tileSize;
-                int worldY = y * tileSize;
-                int screenX = worldX - player.getWorldX() + player.getScreenX();
-                int screenY = worldY - player.getWorldY() + player.getScreenY();
+                for (int x = layer.getX(); x < layer.getWidth(); x++) {
+                    for (int y = layer.getY(); y < layer.getHeight(); y++) {
+                        tileID = layer.getMapData()[y][x];
 
-                // If tile is visible on screen then render it.
-                if (worldX + tileSize > player.getWorldX() - player.getScreenX() &&
-                        worldX - tileSize < player.getWorldX() + player.getScreenX() &&
-                        worldY + tileSize > player.getWorldY() - player.getScreenY() &&
-                        worldY - tileSize < player.getWorldY() + player.getScreenY()) {
+                        worldX = x * tileSize;
+                        worldY = y * tileSize;
+                        screenX = worldX - player.getWorldX() + player.getScreenX();
+                        screenY = worldY - player.getWorldY() + player.getScreenY();
 
-                    g2.drawImage(tile[tileID].getImage(), screenX, screenY, tileSize, tileSize, null);
+                        // If tile is visible on screen then render it.
+                        if (worldX + tileSize > player.getWorldX() - player.getScreenX() &&
+                                worldX - tileSize < player.getWorldX() + player.getScreenX() &&
+                                worldY + tileSize > player.getWorldY() - player.getScreenY() &&
+                                worldY - tileSize < player.getWorldY() + player.getScreenY() &&
+                                tileID != 0){
+
+                            g2.drawImage(tiles.get(tileID).getImage(), screenX, screenY, tileSize, tileSize, null);
+                        }
+                    }
                 }
+
             }
         }
+
+        // DEBUG
+        long end = System.nanoTime();
+        long passed = end - start;
+        g2.setColor(Color.WHITE);
+        g2.drawString(String.valueOf(passed), 10, 50);
+        System.out.println(passed);
+
     }
 
-    public int[][] getMap() {
+    public Map getMap() {
         return map;
-    }
-
-    public Tile getTileByIndex(int index) {
-        return tile[index];
     }
 }

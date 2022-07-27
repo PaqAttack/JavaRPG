@@ -113,7 +113,7 @@ public class Player extends Entity {
 
             // Collision Checking
             collisionHappening = false;
-            gamePanel.getCollisionChecker().checkTile(this);
+            //gamePanel.getCollisionChecker().checkTile(this);
 
             // If no collision is happening then move. Otherwise, nope!
             if (!collisionHappening) {

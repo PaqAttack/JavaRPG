@@ -26,11 +26,7 @@ public class MapLoader {
     String jsonFileText;
     Gson gson;
 
-    // This main method used for testing only.
-    public static void main(String[] args) {
-        String myFile = "/JSON maps/SimpleCustomMap.json";
-        MapLoader maploader = new MapLoader(myFile);
-    }
+    Map loadedMap;
 
     /**
      * Loads the provided JSON file and converts it to the appropriate Map, Layer and Obstacle data.
@@ -43,7 +39,7 @@ public class MapLoader {
         gson = new Gson();
 
         // Creates the Map Object.
-        Map m1 = gson.fromJson(jsonFileText, Map.class);
+        loadedMap = gson.fromJson(jsonFileText, Map.class);
     }
 
     /**
@@ -74,5 +70,9 @@ public class MapLoader {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Map getMap() {
+        return loadedMap;
     }
 }

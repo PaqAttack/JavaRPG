@@ -5,13 +5,14 @@ import tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
 
     private KeyHandler keyHandler = new KeyHandler();
     private TileManager tileManager;
     private Player player;
-    private CollisionChecker collisionChecker;
+    //private CollisionChecker collisionChecker;
 
     // Create and setup game panel object
     public GamePanel() {
@@ -28,13 +29,14 @@ public class GamePanel extends JPanel implements Runnable {
         // Create the player
         int startTileRow = ScreenVar.TILE_SIZE.getValue() * 5;
         int startTileCol = ScreenVar.TILE_SIZE.getValue() * 5;
-        player = new Player(this, keyHandler, startTileCol, startTileRow, 200);
+        player = new Player(this, keyHandler, startTileCol, startTileRow, 250);
 
         // Creates the Tile Manager
         tileManager = new TileManager(player);
 
+
         // Creates Collision Checker
-        collisionChecker = new CollisionChecker(this);
+        //collisionChecker = new CollisionChecker(this);
     }
 
     /**
@@ -48,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
         boolean running = true;
-        final int MAX_FPS = 100;
+        final int MAX_FPS = 60;
         final int MAX_UPS = 60;
 
         // Number of nanoseconds between each update and render
@@ -129,9 +131,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public CollisionChecker getCollisionChecker() {
-        return collisionChecker;
-    }
+//    public CollisionChecker getCollisionChecker() {
+//        return collisionChecker;
+//    }
 
     public TileManager getTileManager() {
         return tileManager;
