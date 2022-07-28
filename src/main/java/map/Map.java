@@ -2,10 +2,8 @@ package map;
 
 public class Map {
     private int height, width;
-    private int tileheight;
-    private int tilewidth;
     private Layer[] layers;
-    private TileSet[] tilesets;
+    private MapTileSet[] tilesets;
 
     /*
     Implementation of this class has not been done yet. This is a major conversion from a much simpler,
@@ -22,6 +20,10 @@ public class Map {
         this.width = width;
     }
 
+    public void processLayers() {
+
+    }
+
     public int getHeight() {
         return height;
     }
@@ -30,19 +32,11 @@ public class Map {
         return width;
     }
 
-    public int getTileheight() {
-        return tileheight;
-    }
-
-    public int getTilewidth() {
-        return tilewidth;
-    }
-
     public Layer[] getLayers() {
         return layers;
     }
 
-    public TileSet[] getTilesets() {
+    public MapTileSet[] getTilesets() {
         return tilesets;
     }
 }

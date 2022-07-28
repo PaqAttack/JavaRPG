@@ -8,7 +8,6 @@ public class Layer {
     private boolean visible;
     private int[] data;
     private int[][] mapData;
-    private Obstacle[] objects;
 
     /*
      Implementation of this class has not been done yet. This is a major conversion from a much simpler,
@@ -75,10 +74,6 @@ public class Layer {
 
     public int[] getData() {
         return data;
-    }
-
-    public Obstacle[] getObjects() {
-        return objects;
     }
 
     public int[][] getMapData() {

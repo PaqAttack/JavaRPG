@@ -1,6 +1,7 @@
-package map;
+package worldManagement;
 
 import com.google.gson.Gson;
+import map.Map;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,6 +41,8 @@ public class MapLoader {
 
         // Creates the Map Object.
         loadedMap = gson.fromJson(jsonFileText, Map.class);
+
+
     }
 
     /**

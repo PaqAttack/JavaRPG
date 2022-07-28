@@ -1,18 +1,19 @@
 package core;
 
 import entity.Player;
-import tiles.TileManager;
+import worldManagement.MapManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
 
     private KeyHandler keyHandler = new KeyHandler();
-    private TileManager tileManager;
+    private MapManager mapManager;
     private Player player;
     //private CollisionChecker collisionChecker;
+
+    private final String startingMap = "TestMapwObstacles.json";
 
     // Create and setup game panel object
     public GamePanel() {
@@ -32,8 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
         player = new Player(this, keyHandler, startTileCol, startTileRow, 250);
 
         // Creates the Tile Manager
-        tileManager = new TileManager(player);
-
+        mapManager = new MapManager(startingMap);
 
         // Creates Collision Checker
         //collisionChecker = new CollisionChecker(this);
@@ -122,7 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
         try {
-            tileManager.render(g2);
+            //tileManager.render(g2);
             player.render(g2);
         } finally {
             g2.dispose();
@@ -135,7 +135,4 @@ public class GamePanel extends JPanel implements Runnable {
 //        return collisionChecker;
 //    }
 
-    public TileManager getTileManager() {
-        return tileManager;
-    }
 }

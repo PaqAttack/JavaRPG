@@ -1,6 +1,6 @@
 package map;
 
-public class TileSet {
+public class MapTileSet {
     private int firstgid;
     private String source;
 
@@ -9,7 +9,7 @@ public class TileSet {
     currently implemented map system. There is currently no connection between this package and the rest of the game.
     */
 
-    public TileSet(int firstgid, String source) {
+    public MapTileSet(int firstgid, String source) {
         this.firstgid = firstgid;
         this.source = source;
     }
