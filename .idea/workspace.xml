@@ -4,31 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48d146b1-f958-4ebb-869a-b6c2ae2a8817" name="Changes" comment="Converted to Loading Map files from Tiled.">
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/b/4b223b4030376c21410ec3c69c7d6d9da60b2263" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/4/84eadc8549b660c2d55b1c4eb34c766dcbd25003" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/4/a4fda0e9896ca24e7da25a38945e0593ed39a8c5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tiles/AnimationSequence.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tiles/Property.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tiles/TileData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/worldManagement/TileSetLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/JSON tilesheets/Grass_Sand.json" afterDir="false" />
+    <list default="true" id="48d146b1-f958-4ebb-869a-b6c2ae2a8817" name="Changes" comment="Redesigned map loading to support animated tiles and reduce rendering time.">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/map/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Layer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/map/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/map/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Obstacle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/map/TileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/map/Obstacle.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tiles/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/TileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/TileSetLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON maps/SimpleCustomMap.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tilesheets/SpriteSheet1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/TileManager.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658913059997</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Redesigned map loading to support animated tiles and reduce rendering time.">
+      <created>1659039643823</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1659039643823</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,18 +179,10 @@
     <MESSAGE value="Cleaned up some imports" />
     <MESSAGE value="JSON Map loader Added." />
     <MESSAGE value="Converted to Loading Map files from Tiled." />
-    <option name="LAST_COMMIT_MESSAGE" value="Converted to Loading Map files from Tiled." />
+    <MESSAGE value="Redesigned map loading to support animated tiles and reduce rendering time." />
+    <option name="LAST_COMMIT_MESSAGE" value="Redesigned map loading to support animated tiles and reduce rendering time." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="m1" />

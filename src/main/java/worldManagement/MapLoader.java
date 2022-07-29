@@ -42,7 +42,7 @@ public class MapLoader {
         // Creates the Map Object.
         loadedMap = gson.fromJson(jsonFileText, Map.class);
 
-
+        System.out.println("debug");
     }
 
     /**

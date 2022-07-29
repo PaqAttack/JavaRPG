@@ -11,7 +11,7 @@ public class GamePanel extends JPanel implements Runnable {
     private KeyHandler keyHandler = new KeyHandler();
     private MapManager mapManager;
     private Player player;
-    //private CollisionChecker collisionChecker;
+    private CollisionChecker collisionChecker;
 
     private final String startingMap = "TestMapwObstacles.json";
 
@@ -33,10 +33,10 @@ public class GamePanel extends JPanel implements Runnable {
         player = new Player(this, keyHandler, startTileCol, startTileRow, 250);
 
         // Creates the Tile Manager
-        mapManager = new MapManager(startingMap);
+        mapManager = new MapManager(startingMap, player);
 
         // Creates Collision Checker
-        //collisionChecker = new CollisionChecker(this);
+        collisionChecker = new CollisionChecker(this);
     }
 
     /**
@@ -109,7 +109,6 @@ public class GamePanel extends JPanel implements Runnable {
      */
     private void update(double deltaTime) {
         player.update(deltaTime);
-
     }
 
     /**
@@ -122,7 +121,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
         try {
-            //tileManager.render(g2);
+            mapManager.render(g2);
             player.render(g2);
         } finally {
             g2.dispose();
@@ -131,8 +130,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-//    public CollisionChecker getCollisionChecker() {
-//        return collisionChecker;
-//    }
+    public MapManager getMapManager() {
+        return mapManager;
+    }
+
+    public CollisionChecker getCollisionChecker() {
+        return collisionChecker;
+    }
 
 }

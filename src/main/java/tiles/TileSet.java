@@ -58,6 +58,10 @@ public class TileSet {
         return tileWidth;
     }
 
+    public ArrayList<Tile> getTiles() {
+        return tiles;
+    }
+
     public void processTileData() {
         // Fix file name by cutting off the folder.
         image = fixFilename(image);

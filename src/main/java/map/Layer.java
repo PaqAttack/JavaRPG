@@ -9,11 +9,6 @@ public class Layer {
     private int[] data;
     private int[][] mapData;
 
-    /*
-     Implementation of this class has not been done yet. This is a major conversion from a much simpler,
-     currently implemented map system. There is currently no connection between this package and the rest of the game.
-     */
-
     /**
      * This will store a single layer within a Map object.
      * Expected layers are Base layer, props layer and Collision layer.
@@ -44,16 +39,6 @@ public class Layer {
                 }
             }
         }
-
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getHeight() {
@@ -78,5 +63,9 @@ public class Layer {
 
     public int[][] getMapData() {
         return mapData;
+    }
+
+    public String getName() {
+        return name;
     }
 }

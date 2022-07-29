@@ -38,6 +38,10 @@ public class Tile {
         isWalkable = walkable;
     }
 
+    public boolean isWalkable() {
+        return isWalkable;
+    }
+
     public void setHasAnimation(boolean hasAnimation) {
         this.hasAnimation = hasAnimation;
     }
