@@ -183,9 +183,6 @@ public class Player extends Entity {
         // Draw the appropriate image on screen.
         g2.drawImage(image, screenX, screenY, ScreenVar.TILE_SIZE.getValue(), ScreenVar.TILE_SIZE.getValue(), null);
 
-        // DEBUG FEATURES - SHOW COLLISION DETECTION AREA OF PLAYER
-        //g2.setColor(Color.GREEN);
-        //g2.fillRect(collisionBounds.x, collisionBounds.y, (int) collisionBounds.getWidth(), (int) collisionBounds.getHeight());
     }
 
     public int getScreenX() {

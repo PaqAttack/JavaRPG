@@ -4,21 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48d146b1-f958-4ebb-869a-b6c2ae2a8817" name="Changes" comment="Redesigned map loading to support animated tiles and reduce rendering time.">
+    <list default="true" id="48d146b1-f958-4ebb-869a-b6c2ae2a8817" name="Changes" comment="Collision Checking updated. Currently, bugged. Needs work/documentation">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/ScreenVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/ScreenVar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/map/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Layer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/map/Obstacle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/AnimationSequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/AnimationFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tiles/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/TileData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/TileData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/TileManager.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +158,21 @@
       <option name="project" value="LOCAL" />
       <updated>1659039643823</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Cleaned up map loading process. Documentation Needed.">
+      <created>1659090238182</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1659090238182</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Collision Checking updated. Currently, bugged. Needs work/documentation">
+      <created>1659090275855</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659090275855</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,7 +193,9 @@
     <MESSAGE value="JSON Map loader Added." />
     <MESSAGE value="Converted to Loading Map files from Tiled." />
     <MESSAGE value="Redesigned map loading to support animated tiles and reduce rendering time." />
-    <option name="LAST_COMMIT_MESSAGE" value="Redesigned map loading to support animated tiles and reduce rendering time." />
+    <MESSAGE value="Cleaned up map loading process. Documentation Needed." />
+    <MESSAGE value="Collision Checking updated. Currently, bugged. Needs work/documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Collision Checking updated. Currently, bugged. Needs work/documentation" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

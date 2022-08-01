@@ -1,10 +1,11 @@
 package tiles;
 
-public class AnimationSequence {
+public class AnimationFrame {
     private int duration;
     private int tileid;
 
-    public AnimationSequence() {
+
+    public AnimationFrame() {
         // ONLY CREATED BY GSON
     }
 
@@ -23,4 +24,6 @@ public class AnimationSequence {
     public int getTileid() {
         return tileid;
     }
+
+
 }

@@ -9,10 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-    /*
-    Implementation of this class has not been done yet. This is a major conversion from a much simpler,
-    currently implemented map system. There is currently no connection between this package and the rest of the game.
-    */
 
 /**
  * Class to handle loading map data from JSON files to the Map class.

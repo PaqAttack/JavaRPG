@@ -69,7 +69,23 @@ public class TileSet {
         // Chop Up sprite sheet
         loadSpriteSheets("/tilesheets/");
 
+        // Add images into array list in animation sequence.
+        // IDs will no longer correspond to the correct tiles once map tile sets are generated.
+        // This will preserve the correct data.
+        setupAnimationTiles();
+
         tiledata = null;
+    }
+
+    private void setupAnimationTiles() {
+        for (Tile tile : tiles) {
+            if (tile.isHasAnimation()){
+                for (AnimationFrame as : tile.getAnimationSequence()) {
+                    BufferedImage tempImg = tiles.get(as.getTileid()).getImage();
+                    tile.getAnimationImages().add(tempImg);
+                }
+            }
+        }
     }
 
     /**
@@ -108,6 +124,8 @@ public class TileSet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
     private void createTile(BufferedImage img, int curIndex) {

@@ -3,6 +3,7 @@ package map;
 import tiles.Tile;
 import worldManagement.MapManager;
 
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 public class Map {
@@ -11,6 +12,8 @@ public class Map {
     private MapTileSet[] tilesets;
     private transient ArrayList<Tile> mapTileSet;
     private transient int[][] collisionMap;
+    private transient ArrayList<Tile> animatedTiles;
+
 
     /**
      * This is intended to be created from JSON files only using exports from the Tiled map editor.
@@ -29,6 +32,7 @@ public class Map {
 
         // initialize mapTileSet. This is a solitary list of all tiles from all tilesets for THIS map.
         mapTileSet = new ArrayList<>();
+        animatedTiles = new ArrayList<>();
 
         // Index 0 is never used.
         mapTileSet.add(null);
@@ -63,7 +67,7 @@ public class Map {
                 for (int y = layer.getY(); y < layer.getHeight(); y++) {
                     int tileID = layer.getMapData()[y][x];
                     if (tileID != 0 && !mapTileSet.get(tileID).isWalkable()) {
-                        collisionMap[y][x] = 1;
+                        collisionMap[x][y] = 1;
                     }
                 }
             }
@@ -75,11 +79,23 @@ public class Map {
         return layers;
     }
 
+    public ArrayList<Tile> getAnimatedTiles() {
+        return animatedTiles;
+    }
+
     public ArrayList<Tile> getMapTileSet() {
         return mapTileSet;
     }
 
     public int[][] getCollisionMap() {
         return collisionMap;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }

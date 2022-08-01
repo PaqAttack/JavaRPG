@@ -1,8 +1,9 @@
 package tiles;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
-public class Tile {
+public class Tile implements Cloneable {
     private int tilesetID;
 
     private int height, width;
@@ -12,10 +13,26 @@ public class Tile {
 
     // Animation properties.
     private boolean hasAnimation = false;
-    private AnimationSequence[] animationSequence;
+    private AnimationFrame[] animationFrame;
+
+    private transient ArrayList<BufferedImage> animationImages = new ArrayList<>();
+    private transient int currentIndex = 0;
+    private transient long lastUpdate = 0;
+    private transient int worldX, worldY;
 
     public Tile(BufferedImage img) {
         this.img = img;
+    }
+
+    public Tile(BufferedImage img, boolean hasAnimation, AnimationFrame[] animationFrame, ArrayList<BufferedImage> animationImages, int currentIndex, long lastUpdate, int worldX, int worldY) {
+        this.img = img;
+        this.hasAnimation = hasAnimation;
+        this.animationFrame = animationFrame;
+        this.animationImages = animationImages;
+        this.currentIndex = currentIndex;
+        this.lastUpdate = lastUpdate;
+        this.worldX = worldX;
+        this.worldY = worldY;
     }
 
     public BufferedImage getImage() {
@@ -42,11 +59,67 @@ public class Tile {
         return isWalkable;
     }
 
+    public boolean isHasAnimation() {
+        return hasAnimation;
+    }
+
+    public AnimationFrame[] getAnimationSequence() {
+        return animationFrame;
+    }
+
     public void setHasAnimation(boolean hasAnimation) {
         this.hasAnimation = hasAnimation;
     }
 
-    public void setAnimationSequence(AnimationSequence[] animationSequence) {
-        this.animationSequence = animationSequence;
+    public void setAnimationSequence(AnimationFrame[] animationFrame) {
+        this.animationFrame = animationFrame;
+    }
+
+    public int getCurrentIndex() {
+        return currentIndex;
+    }
+
+    public ArrayList<BufferedImage> getAnimationImages() {
+        return animationImages;
+    }
+
+    public int getWorldX() {
+        return worldX;
+    }
+
+    public int getWorldY() {
+        return worldY;
+    }
+
+    public void setWorldX(int worldX) {
+        this.worldX = worldX;
+    }
+
+    public void setWorldY(int worldY) {
+        this.worldY = worldY;
+    }
+
+    public void setCurrentIndex(int currentIndex) {
+        this.currentIndex = currentIndex;
+    }
+
+    public void goToNextIndex() {
+        if (currentIndex + 1 == animationImages.size()) {
+            currentIndex = 0;
+        } else {
+            currentIndex++;
+        }
+    }
+
+    public int getTimeToNextFrame() {
+        return animationFrame[currentIndex].getDuration();
+    }
+
+    public long getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(long lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }

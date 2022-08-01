@@ -4,8 +4,8 @@ public enum ScreenVar {
     ORIG_TILE_SIZE(16),
     SCALE(3),
     TILE_SIZE(tileSize()),
-    MAX_SCREEN_COL(16),
-    MAX_SCREEN_ROW(12),
+    MAX_SCREEN_COL(24),     // orig 16
+    MAX_SCREEN_ROW(16),     //orig 12
     SCREEN_WIDTH(screenWidth()),
     SCREEN_HEIGHT(screenHeight());
 

@@ -1,10 +1,8 @@
 package tiles;
 
-import java.util.ArrayList;
-
 public class TileData {
     private int id;
-    private AnimationSequence[] animation;
+    private AnimationFrame[] animation;
     private Property[] properties;
 
     public TileData() {
@@ -15,7 +13,7 @@ public class TileData {
         return id;
     }
 
-    public AnimationSequence[] getAnimation() {
+    public AnimationFrame[] getAnimation() {
         return animation;
     }
 
