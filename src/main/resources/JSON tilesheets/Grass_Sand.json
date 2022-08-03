@@ -165,15 +165,15 @@
         {
          "animation":[
                 {
-                 "duration":100,
+                 "duration":400,
                  "tileid":17
                 }, 
                 {
-                 "duration":100,
+                 "duration":400,
                  "tileid":23
                 }, 
                 {
-                 "duration":100,
+                 "duration":400,
                  "tileid":29
                 }],
          "id":17,

@@ -7,13 +7,10 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    private KeyHandler keyHandler = new KeyHandler();
+    private final KeyHandler keyHandler = new KeyHandler();
     private MapManager mapManager;
     private Player player;
     private CollisionChecker collisionChecker;
-
-    // The map that will load on game start.
-    private final String startingMapFileName = "TestMapwObstacles.json";
 
     // Create and setup game panel object
     public GamePanel() {
@@ -37,6 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
         player = new Player(this, keyHandler, startTileCol, startTileRow, 250);
 
         // Creates the Tile Manager
+        // The map that will load on game start.
+        String startingMapFileName = "FlowingWaterMap.json";
         mapManager = new MapManager(startingMapFileName, player);
 
         // Creates Collision Checker

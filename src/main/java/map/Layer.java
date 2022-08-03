@@ -2,9 +2,11 @@ package map;
 
 public class Layer {
     private int id;
-    private String name;
-    private int height, width;
-    private int x = 0, y = 0;
+    private final String name;
+    private final int height;
+    private final int width;
+    private int x = 0;
+    private int y = 0;
     private boolean visible;
     private int[] data;
     private int[][] mapData;
@@ -26,17 +28,13 @@ public class Layer {
     }
 
     public void processDataArray() {
-        if (!name.equalsIgnoreCase("Collision")) {
+        int myIndex = 0;
+        mapData = new int[width][height];
 
-            int myIndex = 0;
-            int row = 0, col = 0;
-            mapData = new int[width][height];
-
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    mapData[y][x] = data[myIndex];
-                    myIndex++;
-                }
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                mapData[y][x] = data[myIndex];
+                myIndex++;
             }
         }
     }

@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
     // X,Y Coordinates for Entity Position
-    protected int worldX, worldY;
+    protected int worldX;
+    protected int worldY;
 
     // Movement Speed for Entities that move.
     protected int speed;
@@ -22,7 +23,7 @@ public class Entity {
     // Collision Detection Details
     protected Rectangle collisionBounds;
     protected boolean collisionHappening = false;
-    public final static int CollisionCheckDistance = 4;
+    public static final int COLLISION_CHECK_DISTANCE = 4;
 
     // Sprite management Variables
     protected int spriteCounter = 0;       // Counts up to Duration every frame.

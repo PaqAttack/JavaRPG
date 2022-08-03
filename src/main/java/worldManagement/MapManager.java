@@ -114,13 +114,16 @@ public class MapManager {
 
         singleImage = concatImage;
 
-        //DEBUG Function to see new image
+        /*
+        DEBUG Function to see new image
+
         try {
             ImageIO.write(concatImage, "png", new File("C:\\Users\\Christopher Paquin\\desktop\\newImage.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("DEBUG BREAK POINT");
+
+        */
     }
 
     private void loadAvailableTileSets() {
@@ -159,17 +162,16 @@ public class MapManager {
         // rendering every tile at 24/16 = 4.7m to 5.6m
         // rendering time single image at 24/16 = 870k to 1.02m
 
-        long bgStart = System.nanoTime();
+//        long bgStart = System.nanoTime();
 
         screenX = worldX - player.getWorldX() + player.getScreenX();
         screenY = worldY - player.getWorldY() + player.getScreenY();
 
         g2.drawImage(singleImage, screenX, screenY, singleImage.getWidth(), singleImage.getHeight(), null);
 
-        long bg_passed = System.nanoTime() - bgStart;
+//        long bg_passed = System.nanoTime() - bgStart;
 
-
-        long aniStart = System.nanoTime();
+//        long aniStart = System.nanoTime();
 
         for (Tile animatedTile : currentMap.getAnimatedTiles()) {
 
@@ -195,47 +197,14 @@ public class MapManager {
 
         }
 
-
-        /*          ORIGINAL PROCESS
-        for (Layer layer : currentMap.getLayers()) {
-
-            if (layer.getData() != null) {
-
-                for (int x = layer.getX(); x < layer.getWidth(); x++) {
-                    for (int y = layer.getY(); y < layer.getHeight(); y++) {
-                        tileID = layer.getMapData()[y][x];
-
-                        worldX = x * tileSize;
-                        worldY = y * tileSize;
-                        screenX = worldX - player.getWorldX() + player.getScreenX();
-                        screenY = worldY - player.getWorldY() + player.getScreenY();
-
-                        // If tile is visible on screen then render it.
-                        if (worldX + tileSize > player.getWorldX() - player.getScreenX() &&
-                                worldX - tileSize < player.getWorldX() + player.getScreenX() &&
-                                worldY + tileSize > player.getWorldY() - player.getScreenY() &&
-                                worldY - tileSize < player.getWorldY() + player.getScreenY() &&
-                                tileID != 0){
-
-                            g2.drawImage(currentMap.getMapTileSet().get(tileID).getImage(), screenX, screenY, tileSize, tileSize, null);
-                        }
-                    }
-                }
-
-            }
-        }
-        */
-
-
         // DEBUG
-
-        long ani_passed = System.nanoTime() - aniStart;
-        g2.setColor(Color.WHITE);
-        g2.drawString("Background time: " + bg_passed, 10, 50);
-        g2.drawString("Animated Tile time: " + ani_passed, 10, 70);
-
-        System.out.println("Background time: " + bg_passed);
-        System.out.println("Animated Tile time: " + ani_passed);
+//        long ani_passed = System.nanoTime() - aniStart;
+//        g2.setColor(Color.WHITE);
+//        g2.drawString("Background time: " + bg_passed, 10, 50);
+//        g2.drawString("Animated Tile time: " + ani_passed, 10, 70);
+//
+//        System.out.println("Background time: " + bg_passed);
+//        System.out.println("Animated Tile time: " + ani_passed);
 
     }
 

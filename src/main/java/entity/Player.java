@@ -16,8 +16,8 @@ import java.util.Objects;
  */
 public class Player extends Entity {
     // Toying with leaving this here but likely to move it as all keyboard input is player input.
-    private KeyHandler keyHandler;
-    private GamePanel gamePanel;
+    private final KeyHandler keyHandler;
+    private final GamePanel gamePanel;
 
     // These will determine where the player is displayed.
     public final int screenX;

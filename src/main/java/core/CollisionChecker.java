@@ -4,7 +4,7 @@ import entity.Entity;
 
 public class CollisionChecker {
 
-    private GamePanel gamepanel;
+    private final GamePanel gamepanel;
 
     /**
      * Class to handle collision checking between various entities and the world
@@ -44,7 +44,8 @@ public class CollisionChecker {
         // represents the row of tiles which contains the bottom edge of the entity collision bounds
         int eBottomRow = eBottomWorldY / ScreenVar.TILE_SIZE.getValue();
 
-        int tile1, tile2;
+        int tile1;
+        int tile2;
 
         /*
         When moving in any direction the 2 ends of the edge facing that direction are the only
@@ -53,8 +54,8 @@ public class CollisionChecker {
         is triggered and the entity is blocked from moving.
          */
         switch (entity.getDirection()) {
-            case UP: {
-                eTopRow = (eTopWorldY - Entity.CollisionCheckDistance) / ScreenVar.TILE_SIZE.getValue();
+            case UP -> {
+                eTopRow = (eTopWorldY - Entity.COLLISION_CHECK_DISTANCE) / ScreenVar.TILE_SIZE.getValue();
 
                 if (eTopRow <= 0) {
                     entity.setCollisionHappening(true);
@@ -67,10 +68,9 @@ public class CollisionChecker {
                 if (tile1 == 1 || tile2 == 1) {
                     entity.setCollisionHappening(true);
                 }
-                break;
             }
-            case DOWN: {
-                eBottomRow = (eBottomWorldY + Entity.CollisionCheckDistance) / ScreenVar.TILE_SIZE.getValue();
+            case DOWN -> {
+                eBottomRow = (eBottomWorldY + Entity.COLLISION_CHECK_DISTANCE) / ScreenVar.TILE_SIZE.getValue();
 
                 if (eBottomRow >= WorldVar.worldHeight()) {
                     entity.setCollisionHappening(true);
@@ -83,10 +83,9 @@ public class CollisionChecker {
                 if (tile1 == 1 || tile2 == 1) {
                     entity.setCollisionHappening(true);
                 }
-                break;
             }
-            case RIGHT: {
-                eRightCol = (eRightWorldX + Entity.CollisionCheckDistance) / ScreenVar.TILE_SIZE.getValue();
+            case RIGHT -> {
+                eRightCol = (eRightWorldX + Entity.COLLISION_CHECK_DISTANCE) / ScreenVar.TILE_SIZE.getValue();
 
                 if (eRightCol >= WorldVar.worldWidth()) {
                     entity.setCollisionHappening(true);
@@ -99,10 +98,9 @@ public class CollisionChecker {
                 if (tile1 == 1 || tile2 == 1) {
                     entity.setCollisionHappening(true);
                 }
-                break;
             }
-            case LEFT: {
-                eLeftCol = (eLeftWorldX - Entity.CollisionCheckDistance) / ScreenVar.TILE_SIZE.getValue();
+            case LEFT -> {
+                eLeftCol = (eLeftWorldX - Entity.COLLISION_CHECK_DISTANCE) / ScreenVar.TILE_SIZE.getValue();
 
                 if (eLeftCol <= 0) {
                     entity.setCollisionHappening(true);
@@ -115,7 +113,6 @@ public class CollisionChecker {
                 if (tile1 == 1 || tile2 == 1) {
                     entity.setCollisionHappening(true);
                 }
-                break;
             }
         }
     }
