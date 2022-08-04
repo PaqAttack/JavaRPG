@@ -27,10 +27,17 @@ public class Layer {
         this.width = width;
     }
 
+    /**
+     * Transfers all map tile special properties to a mapData array.
+     * This array is used in the creation of the collision map.
+     *
+     * More data will likely be added later.
+     */
     public void processDataArray() {
         int myIndex = 0;
         mapData = new int[width][height];
 
+        // data array stores the custom properties for each tile such as "blocked"
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 mapData[y][x] = data[myIndex];

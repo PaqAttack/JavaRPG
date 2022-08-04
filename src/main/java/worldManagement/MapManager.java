@@ -7,18 +7,19 @@ import map.Map;
 import tiles.Tile;
 import tiles.TileSet;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Handles all map/tile loading and map display.
+ */
 public class MapManager {
 
     private TileSetLoader tilesetLoader;
     private MapLoader mapLoader;
-    private Player player;
+    private final Player player;
 
     private BufferedImage singleImage;
 
@@ -50,7 +51,7 @@ public class MapManager {
         // Load every tileset in resources.
         loadAvailableTileSets();
 
-        // Save all tilesets for easy access.
+        // Save all tile sets for easy access.
         tileSets = tilesetLoader.getTileSets();
 
         // Delete tilesetLoader when no longer necessary
@@ -71,28 +72,36 @@ public class MapManager {
 
         // Delete mapLoader when no longer necessary
         mapLoader = null;
-
-        // Do garbage collection.
-        System.gc();
     }
 
+    /**
+     * Draw all static elements of the background onto a single image for background rendering
+     * @param map Map to use as a source for the new image.
+     */
     private void concatImage(Map map) {
         BufferedImage concatImage = new BufferedImage(map.getWidth() * ScreenVar.TILE_SIZE.getValue(), map.getHeight() * ScreenVar.TILE_SIZE.getValue(), BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = concatImage.createGraphics();
 
+        // Cycle through all layers
         for (Layer layer : map.getLayers()) {
 
+            // If there is layer data then process it
             if (layer.getData() != null) {
 
+                // Cycle through just as if we were rendering images
                 for (int x = layer.getX(); x < layer.getWidth(); x++) {
                     for (int y = layer.getY(); y < layer.getHeight(); y++) {
                         tileID = layer.getMapData()[y][x];
 
+                        // If this layer at this location isn't non-existent then proceed.
                         if (map.getMapTileSet().get(tileID) != null) {
-                            if (!map.getMapTileSet().get(tileID).isHasAnimation()) {
+
+                            // If a tile is not animated draw it onto the new image.
+                            if (!map.getMapTileSet().get(tileID).hasAnimation()) {
                                 g2d.drawImage(map.getMapTileSet().get(tileID).getImage(), x * ScreenVar.TILE_SIZE.getValue(), y * ScreenVar.TILE_SIZE.getValue(), null);
                             } else {
-                                // it has an animation so add it to the list
+
+                                // it has an animation so add it to the list of animated tiles.
                                 map.getAnimatedTiles().add(new Tile(map.getMapTileSet().get(tileID).getImage(),
                                         true,
                                         map.getMapTileSet().get(tileID).getAnimationSequence(),
@@ -126,6 +135,9 @@ public class MapManager {
         */
     }
 
+    /**
+     * Gets a list of all tile sets in the jsonTilesheetPath resource folder and loads it.
+     */
     private void loadAvailableTileSets() {
         File folder = new File(jsonTilesheetPath);
         File[] listOfFiles = folder.listFiles();
@@ -137,6 +149,12 @@ public class MapManager {
         }
     }
 
+    /**
+     * Find a tile set by its file name minus extension.
+     * This connects JSON and png files.
+     * @param name String of a tile set to locate
+     * @return tile set with a matching name.
+     */
     public TileSet getTileSetByName(String name) {
         for (TileSet ts : tileSets) {
             String tileSetName = ts.getImageFileName();

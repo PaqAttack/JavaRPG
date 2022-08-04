@@ -3,10 +3,11 @@ package tiles;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Tile implements Cloneable {
+public class Tile {
     private int tilesetID;
 
-    private int height, width;
+    private int height;
+    private int width;
     private BufferedImage img;
 
     private boolean isWalkable;
@@ -15,6 +16,8 @@ public class Tile implements Cloneable {
     private boolean hasAnimation = false;
     private AnimationFrame[] animationFrame;
 
+    // These need to be transient to avoid errors with GSON imports.
+    // Not 100% sure why since the names dont match imported properties... Something to look up.
     private transient ArrayList<BufferedImage> animationImages = new ArrayList<>();
     private transient int currentIndex = 0;
     private transient long lastUpdate = 0;
@@ -59,7 +62,7 @@ public class Tile implements Cloneable {
         return isWalkable;
     }
 
-    public boolean isHasAnimation() {
+    public boolean hasAnimation() {
         return hasAnimation;
     }
 

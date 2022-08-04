@@ -13,6 +13,10 @@ public class MapTileSet {
         return firstgid;
     }
 
+    /**
+     * This will return the file name without a file extension (.png) or the directory information such as "xxx/".
+     * @return String of file name. This will allow us to connect the JSON and png files and associate them correctly.
+     */
     public String getName() {
         String[] stringArray = source.split("/");
 

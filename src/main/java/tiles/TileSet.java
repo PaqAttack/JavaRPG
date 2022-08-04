@@ -30,44 +30,15 @@ public class TileSet {
         tiles = new ArrayList<>();
     }
 
-    public void setTileData(TileData[] tiles) {
-        this.tiledata = tiles;
-    }
-
-    public String getImageFileName() {
-        return image;
-    }
-
-    public int getColumns() {
-        return columns;
-    }
-
-    public int getRows() {
-        return imageHeight / tileHeight;
-    }
-
-    public int getTileCount() {
-        return tileCount;
-    }
-
-    public int getTileHeight() {
-        return tileHeight;
-    }
-
-    public int getTileWidth() {
-        return tileWidth;
-    }
-
-    public ArrayList<Tile> getTiles() {
-        return tiles;
-    }
-
+    /**
+     * Processes tile set data and preps it for loading into a map.
+     */
     public void processTileData() {
         // Fix file name by cutting off the folder.
         image = fixFilename(image);
 
         // Chop Up sprite sheet
-        loadSpriteSheets("/tilesheets/");
+        chopTileSheet();
 
         // Add images into array list in animation sequence.
         // IDs will no longer correspond to the correct tiles once map tile sets are generated.
@@ -77,9 +48,13 @@ public class TileSet {
         tiledata = null;
     }
 
+    /**
+     * Adds all animation tiles to a separate array.
+     * This enables us to display the animation tile sequences as normal on top of the static concatenated image.
+     */
     private void setupAnimationTiles() {
         for (Tile tile : tiles) {
-            if (tile.isHasAnimation()){
+            if (tile.hasAnimation()){
                 for (AnimationFrame as : tile.getAnimationSequence()) {
                     BufferedImage tempImg = tiles.get(as.getTileid()).getImage();
                     tile.getAnimationImages().add(tempImg);
@@ -98,9 +73,12 @@ public class TileSet {
         return stringArray[stringArray.length - 1];
     }
 
-    public void loadSpriteSheets(String filePath) {
+    /**
+     * chops up tilesets and creates tiles from them.
+     */
+    public void chopTileSheet() {
         int curID = 0;
-        String fileToLoad = filePath + image;
+        String fileToLoad = "/tilesheets/" + image;
 
         try {
             // Get tilesheet image
@@ -114,9 +92,7 @@ public class TileSet {
                             scaleImage(
                                     img.getSubimage(x * tileWidth, y * tileHeight, tileWidth, tileHeight),
                                     ScreenVar.TILE_SIZE.getValue(),
-                                    ScreenVar.TILE_SIZE.getValue()),
-
-                            curID);
+                                    ScreenVar.TILE_SIZE.getValue()));
                     curID++;
                 }
             }
@@ -124,29 +100,58 @@ public class TileSet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
-    private void createTile(BufferedImage img, int curIndex) {
+    /**
+     * Create a new tile and add all its data.
+     * @param img Buffered Image for the tile to use.
+     */
+    private void createTile(BufferedImage img) {
         tiles.add(new Tile(img));
-        tiles.get(curIndex).setWalkable(!tiledata[curIndex].isBlocked());
-        tiles.get(curIndex).setHeight(tileHeight);
-        tiles.get(curIndex).setWidth(tileWidth);
-        tiles.get(curIndex).setTilesetID(curIndex);
-        if (tiledata[curIndex].hasAnimation()) {
-            tiles.get(curIndex).setAnimationSequence(tiledata[curIndex].getAnimation());
-            tiles.get(curIndex).setHasAnimation(true);
+        int lastIndex = tiles.size()-1;
+        tiles.get(lastIndex).setWalkable(!tiledata[lastIndex].isBlocked());
+        tiles.get(lastIndex).setHeight(tileHeight);
+        tiles.get(lastIndex).setWidth(tileWidth);
+        tiles.get(lastIndex).setTilesetID(lastIndex);
+        if (tiledata[lastIndex].hasAnimation()) {
+            tiles.get(lastIndex).setAnimationSequence(tiledata[lastIndex].getAnimation());
+            tiles.get(lastIndex).setHasAnimation(true);
         }
-
     }
 
+    /**
+     * Scales the image to the desired size
+     * @param orig original buffered image
+     * @param width desired width in pixels
+     * @param height desired height in pixels
+     * @return scaled buffered image
+     */
     private BufferedImage scaleImage(BufferedImage orig, int width, int height) {
         BufferedImage scaledImg = new BufferedImage(width, height, orig.getType());
         Graphics2D g2 = scaledImg.createGraphics();
         g2.drawImage(orig, 0, 0, width, height, null);
         g2.dispose();
         return scaledImg;
+    }
+
+    public void setTileData(TileData[] tiles) {
+        this.tiledata = tiles;
+    }
+
+    public String getImageFileName() {
+        return image;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public int getRows() {
+        return imageHeight / tileHeight;
+    }
+
+    public ArrayList<Tile> getTiles() {
+        return tiles;
     }
 }
 

@@ -4,28 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48d146b1-f958-4ebb-869a-b6c2ae2a8817" name="Changes" comment="Fixed Collision Checking. Started code cleanup documentation.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/JSON maps/FlowingWaterMap.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/JSON tilesheets/water_test.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/tilesheets/water_test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/b/4b223b4030376c21410ec3c69c7d6d9da60b2263" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/4/84eadc8549b660c2d55b1c4eb34c766dcbd25003" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/4/a4fda0e9896ca24e7da25a38945e0593ed39a8c5" beforeDir="false" />
+    <list default="true" id="48d146b1-f958-4ebb-869a-b6c2ae2a8817" name="Changes" comment="Added Documentation. Several Bug Fixes">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/KeyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/ScreenVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/ScreenVar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/WorldVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/WorldVar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/map/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Layer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON maps/TestMapwObstacles.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON tilesheets/Grass_Sand.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON tilesheets/Grass_Sand.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659390911420</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added Documentation. Several Bug Fixes">
+      <created>1659559124636</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1659559124636</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -211,7 +206,8 @@
     <MESSAGE value="Cleaned up map loading process. Documentation Needed." />
     <MESSAGE value="Collision Checking updated. Currently, bugged. Needs work/documentation" />
     <MESSAGE value="Fixed Collision Checking. Started code cleanup documentation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Collision Checking. Started code cleanup documentation." />
+    <MESSAGE value="Added Documentation. Several Bug Fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Documentation. Several Bug Fixes" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
