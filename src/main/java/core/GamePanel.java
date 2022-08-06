@@ -1,7 +1,8 @@
 package core;
 
 import entity.Player;
-import worldManagement.MapManager;
+import world.MapManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -118,6 +119,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     /**
      * Redirect the screen rendering controls to the render() method.
+     *
      * @param g Graphics Object
      */
     @Override
@@ -128,6 +130,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     /**
      * Update method handles updating all game objects.
+     *
      * @param deltaTime The time since last update. This prevents faster computers from having a different game experience from a slow computer.
      */
     private void update(double deltaTime) {
@@ -136,6 +139,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     /**
      * Draws all objects on screen.
+     *
      * @param g Graphics Object
      */
     public void render(Graphics g) {

@@ -47,6 +47,7 @@ public class Entity {
 
     /**
      * Get entity X Position
+     *
      * @return integer representing distance from the right of the screen.
      */
     public int getWorldX() {
@@ -55,6 +56,7 @@ public class Entity {
 
     /**
      * Get entity Y Position
+     *
      * @return integer representing distance from the top of the screen.
      */
     public int getWorldY() {
@@ -63,6 +65,7 @@ public class Entity {
 
     /**
      * Get entity speed
+     *
      * @return integer representing speed of the entity.
      */
     public int getSpeed() {

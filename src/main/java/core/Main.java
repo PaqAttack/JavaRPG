@@ -5,6 +5,7 @@ import javax.swing.*;
 public class Main {
     /**
      * Would you like to play a game?
+     *
      * @param args Not supported
      */
     public static void main(String[] args) {

@@ -7,7 +7,10 @@ import java.awt.event.KeyListener;
  * Handles keyboard input for the game.
  */
 public class KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed;
+    public boolean downPressed;
+    public boolean leftPressed;
+    public boolean rightPressed;
     public boolean playerMoving;
 
     @Override

@@ -1,7 +1,8 @@
 package map;
 
 import tiles.Tile;
-import worldManagement.MapManager;
+import world.MapManager;
+
 import java.util.*;
 
 public class Map {
@@ -16,8 +17,9 @@ public class Map {
 
     /**
      * This is intended to be created from JSON files only using exports from the Tiled map editor.
+     *
      * @param height Number of tiles high the map is.
-     * @param width Number of tiles wide the map is.
+     * @param width  Number of tiles wide the map is.
      */
     public Map(int height, int width) {
         this.height = height;
@@ -26,6 +28,7 @@ public class Map {
 
     /**
      * Process all layers and prepare the data to be used by the game.
+     *
      * @param mapMngr Object that runs all map management.
      */
     public void processLayers(MapManager mapMngr) {

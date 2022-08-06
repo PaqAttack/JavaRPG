@@ -30,7 +30,7 @@ public class Layer {
     /**
      * Transfers all map tile special properties to a mapData array.
      * This array is used in the creation of the collision map.
-     *
+     * <p>
      * More data will likely be added later.
      */
     public void processDataArray() {

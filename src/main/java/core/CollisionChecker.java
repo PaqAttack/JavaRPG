@@ -8,6 +8,7 @@ public class CollisionChecker {
 
     /**
      * Class to handle collision checking between various entities and the world
+     *
      * @param gamePanel object
      */
     public CollisionChecker(GamePanel gamePanel) {
@@ -17,6 +18,7 @@ public class CollisionChecker {
     /**
      * Compares entity's next position to tiles and determines if a movement is permissible.
      * entity.setCollisionHappening is set to true if a collision is imminent and movement is blocked.
+     *
      * @param entity Entity that is being compared to its surrounding tiles.
      */
     public void checkTile(Entity entity) {

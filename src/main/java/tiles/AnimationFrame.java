@@ -11,6 +11,7 @@ public class AnimationFrame {
 
     /**
      * Returns duration in milliseconds to display a TileID
+     *
      * @return int representing milliseconds to display this TileID.
      */
     public int getDuration() {
@@ -19,6 +20,7 @@ public class AnimationFrame {
 
     /**
      * TileID to display at this animation sequence point.
+     *
      * @return int representing tileID
      */
     public int getTileid() {

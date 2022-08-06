@@ -1,4 +1,4 @@
-package worldManagement;
+package world;
 
 import core.ScreenVar;
 import entity.Player;
@@ -23,25 +23,11 @@ public class MapManager {
 
     private BufferedImage singleImage;
 
-    private final String jsonTilesheetPath = "src/main/resources/JSON tilesheets/";
-    private final String jsonRSSTilesheetPath = "/JSON tilesheets/";
-    private final String jsonMapPath = "/JSON maps/";
-
     // Loaded data
     private ArrayList<TileSet> tileSets;
     private Map currentMap;
-    private long timeInMillis;
 
-    private int tileID = 0;
-    private int worldX = 0;
-    private int worldY = 0;
-    private int screenX = 0;
-    private int screenY = 0;
-    private int tWorldX = 0;
-    private int tWorldY = 0;
-    private int tScreenX = 0;
-    private int tScreenY = 0;
-    private int tileSize = ScreenVar.TILE_SIZE.getValue();
+    private final int tileSize = ScreenVar.TILE_SIZE.getValue();
 
     public MapManager(String startingMap, Player player) {
         // Get tileset loader ready
@@ -59,6 +45,7 @@ public class MapManager {
 
         // HANDLE MAP
         // Load up starting map
+        String jsonMapPath = "/JSON maps/";
         mapLoader = new MapLoader(jsonMapPath + startingMap);
 
         // Save current map for easy access.
@@ -76,6 +63,7 @@ public class MapManager {
 
     /**
      * Draw all static elements of the background onto a single image for background rendering
+     *
      * @param map Map to use as a source for the new image.
      */
     private void concatImage(Map map) {
@@ -91,7 +79,7 @@ public class MapManager {
                 // Cycle through just as if we were rendering images
                 for (int x = layer.getX(); x < layer.getWidth(); x++) {
                     for (int y = layer.getY(); y < layer.getHeight(); y++) {
-                        tileID = layer.getMapData()[y][x];
+                        int tileID = layer.getMapData()[y][x];
 
                         // If this layer at this location isn't non-existent then proceed.
                         if (map.getMapTileSet().get(tileID) != null) {
@@ -139,11 +127,13 @@ public class MapManager {
      * Gets a list of all tile sets in the jsonTilesheetPath resource folder and loads it.
      */
     private void loadAvailableTileSets() {
+        String jsonTilesheetPath = "src/main/resources/JSON tilesheets/";
         File folder = new File(jsonTilesheetPath);
         File[] listOfFiles = folder.listFiles();
 
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
+                String jsonRSSTilesheetPath = "/JSON tilesheets/";
                 tilesetLoader.loadTileSet(jsonRSSTilesheetPath + listOfFiles[i].getName());
             }
         }
@@ -152,6 +142,7 @@ public class MapManager {
     /**
      * Find a tile set by its file name minus extension.
      * This connects JSON and png files.
+     *
      * @param name String of a tile set to locate
      * @return tile set with a matching name.
      */
@@ -167,47 +158,66 @@ public class MapManager {
         return null;
     }
 
+    /**
+     * Gets the collision map for the currently loaded map.
+     * 1 is blocked, 0 is open
+     *
+     * @return 2D int array of 1s and 0s.
+     */
     public int[][] getCollisionMap() {
         return currentMap.getCollisionMap();
     }
 
+    /**
+     * Gets the currently loaded Map item.
+     *
+     * @return Currently loaded Map Object.
+     */
     public Map getCurrentMap() {
         return currentMap;
     }
 
+    /**
+     * Renders the map on the screen.
+     * A concatenation of static elements are rendered first and then all animated tiles are overlaid.
+     *
+     * @param g2 Graphics Object
+     */
     public void render(Graphics2D g2) {
         // DEBUG
         // rendering every tile at 24/16 = 4.7m to 5.6m
         // rendering time single image at 24/16 = 870k to 1.02m
+        // long bgStart = System.nanoTime();
 
-//        long bgStart = System.nanoTime();
+        int screenX = -player.getWorldX() + player.getScreenX();
+        int screenY = -player.getWorldY() + player.getScreenY();
 
-        screenX = worldX - player.getWorldX() + player.getScreenX();
-        screenY = worldY - player.getWorldY() + player.getScreenY();
-
+        // Draw single image on background
         g2.drawImage(singleImage, screenX, screenY, singleImage.getWidth(), singleImage.getHeight(), null);
 
 //        long bg_passed = System.nanoTime() - bgStart;
-
 //        long aniStart = System.nanoTime();
 
+        // Iterate through each animated tile and display it if its on screen
         for (Tile animatedTile : currentMap.getAnimatedTiles()) {
 
-            tWorldX = animatedTile.getWorldX() * tileSize;
-            tWorldY = animatedTile.getWorldY() * tileSize;
-            tScreenX = tWorldX - player.getWorldX() + player.getScreenX();
-            tScreenY = tWorldY - player.getWorldY() + player.getScreenY();
+            int tWorldX = animatedTile.getWorldX() * tileSize;
+            int tWorldY = animatedTile.getWorldY() * tileSize;
+            int tScreenX = tWorldX - player.getWorldX() + player.getScreenX();
+            int tScreenY = tWorldY - player.getWorldY() + player.getScreenY();
 
             if (tWorldX + tileSize > player.getWorldX() - player.getScreenX() &&
                     tWorldX - tileSize < player.getWorldX() + player.getScreenX() &&
                     tWorldY + tileSize > player.getWorldY() - player.getScreenY() &&
                     tWorldY - tileSize < player.getWorldY() + player.getScreenY()) {
 
+                // draw animated tiles using image at its current index
                 g2.drawImage(animatedTile.getAnimationImages().get(animatedTile.getCurrentIndex()), tScreenX, tScreenY, tileSize, tileSize, null);
             }
 
-            timeInMillis = System.currentTimeMillis();
+            long timeInMillis = System.currentTimeMillis();
 
+            // Update tile image index if needed to render new image next frame.
             if (timeInMillis >= animatedTile.getLastUpdate() + animatedTile.getTimeToNextFrame()) {
                 animatedTile.goToNextIndex();
                 animatedTile.setLastUpdate(timeInMillis);

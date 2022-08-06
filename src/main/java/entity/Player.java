@@ -36,7 +36,7 @@ public class Player extends Entity {
         this.keyHandler = keyHandler;
         this.gamePanel = gamePanel;
 
-        screenX = (ScreenVar.SCREEN_WIDTH.getValue() / 2) - (ScreenVar.TILE_SIZE.getValue()/ 2);
+        screenX = (ScreenVar.SCREEN_WIDTH.getValue() / 2) - (ScreenVar.TILE_SIZE.getValue() / 2);
         screenY = (ScreenVar.SCREEN_HEIGHT.getValue() / 2) - (ScreenVar.TILE_SIZE.getValue() / 2);
 
         spriteMax = 4;

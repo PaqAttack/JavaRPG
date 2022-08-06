@@ -54,7 +54,7 @@ public class TileSet {
      */
     private void setupAnimationTiles() {
         for (Tile tile : tiles) {
-            if (tile.hasAnimation()){
+            if (tile.hasAnimation()) {
                 for (AnimationFrame as : tile.getAnimationSequence()) {
                     BufferedImage tempImg = tiles.get(as.getTileid()).getImage();
                     tile.getAnimationImages().add(tempImg);
@@ -65,6 +65,7 @@ public class TileSet {
 
     /**
      * Returns file name "xxxxx.png" from "/dir/dir/xxxxx.png"
+     *
      * @param fileName original file name
      * @return file name as string without directories
      */
@@ -104,11 +105,12 @@ public class TileSet {
 
     /**
      * Create a new tile and add all its data.
+     *
      * @param img Buffered Image for the tile to use.
      */
     private void createTile(BufferedImage img) {
         tiles.add(new Tile(img));
-        int lastIndex = tiles.size()-1;
+        int lastIndex = tiles.size() - 1;
         tiles.get(lastIndex).setWalkable(!tiledata[lastIndex].isBlocked());
         tiles.get(lastIndex).setHeight(tileHeight);
         tiles.get(lastIndex).setWidth(tileWidth);
@@ -121,8 +123,9 @@ public class TileSet {
 
     /**
      * Scales the image to the desired size
-     * @param orig original buffered image
-     * @param width desired width in pixels
+     *
+     * @param orig   original buffered image
+     * @param width  desired width in pixels
      * @param height desired height in pixels
      * @return scaled buffered image
      */

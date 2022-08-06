@@ -1,4 +1,4 @@
-package worldManagement;
+package world;
 
 import com.google.gson.Gson;
 import map.Map;
@@ -22,6 +22,7 @@ public class MapLoader {
 
     /**
      * Loads the provided JSON file and converts it to the appropriate Map, Layer and Obstacle data.
+     *
      * @param fileName file name in resources to load. This must be a JSON file exported from Tiled.
      */
     public MapLoader(String fileName) {
@@ -35,6 +36,7 @@ public class MapLoader {
 
     /**
      * Loads JSON files into a text string and returns that data.
+     *
      * @param fileName JSON file location in resources. This must be a Tiled exported map file.
      * @return A string containing the JSON file data.
      */
@@ -47,7 +49,7 @@ public class MapLoader {
 
             // Build a string.
             StringBuilder sb = new StringBuilder();
-            for (String line; (line = br.readLine()) != null;) {
+            for (String line; (line = br.readLine()) != null; ) {
                 sb.append(line);
             }
 

@@ -4,16 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48d146b1-f958-4ebb-869a-b6c2ae2a8817" name="Changes" comment="Added Documentation. Several Bug Fixes">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+    <list default="true" id="48d146b1-f958-4ebb-869a-b6c2ae2a8817" name="Changes" comment="Added Documentation.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/KeyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/map/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Layer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/AnimationFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/AnimationFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/world/MapLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/world/MapManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/TileSetLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/world/TileSetLoader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,12 +82,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="worldManagement.MapLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="worldManagement.MapLoader" />
+    <configuration name="MapLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="world.MapLoader" />
       <module name="JavaRPG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="worldManagement.*" />
+          <option name="PATTERN" value="world.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -89,12 +95,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="worldManagement.TileSetLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="worldManagement.TileSetLoader" />
+    <configuration name="TileSetLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="world.TileSetLoader" />
       <module name="JavaRPG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="worldManagement.*" />
+          <option name="PATTERN" value="world.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -182,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659559124636</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added Documentation.">
+      <created>1659649544305</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659649544305</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -207,7 +220,8 @@
     <MESSAGE value="Collision Checking updated. Currently, bugged. Needs work/documentation" />
     <MESSAGE value="Fixed Collision Checking. Started code cleanup documentation." />
     <MESSAGE value="Added Documentation. Several Bug Fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Documentation. Several Bug Fixes" />
+    <MESSAGE value="Added Documentation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Documentation." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
