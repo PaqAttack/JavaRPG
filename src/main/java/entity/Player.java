@@ -2,19 +2,23 @@ package entity;
 
 import core.GamePanel;
 import core.KeyHandler;
-import core.ScreenVar;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class to handler the main player character for the game.
  * This class will extend the Entity Base class like all other game entities.
  */
 public class Player extends Entity {
+
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     // Toying with leaving this here but likely to move it as all keyboard input is player input.
     private final KeyHandler keyHandler;
     private final GamePanel gamePanel;
@@ -36,17 +40,17 @@ public class Player extends Entity {
         this.keyHandler = keyHandler;
         this.gamePanel = gamePanel;
 
-        screenX = (ScreenVar.SCREEN_WIDTH.getValue() / 2) - (ScreenVar.TILE_SIZE.getValue() / 2);
-        screenY = (ScreenVar.SCREEN_HEIGHT.getValue() / 2) - (ScreenVar.TILE_SIZE.getValue() / 2);
+        screenX = (gamePanel.getScreenWidth() / 2) - (gamePanel.getTileSize() / 2);
+        screenY = (gamePanel.getScreenHeight() / 2) - (gamePanel.getTileSize() / 2);
 
         spriteMax = 4;
         getPlayerImage();
 
         // Collision detection area of the player area.
-        int boundsX = 3 * ScreenVar.SCALE.getValue();
-        int boundsY = 10 * ScreenVar.SCALE.getValue();
-        int boundsW = ScreenVar.TILE_SIZE.getValue() - (3 * ScreenVar.SCALE.getValue() * 2);
-        int boundsH = ScreenVar.TILE_SIZE.getValue() - (10 * ScreenVar.SCALE.getValue());
+        int boundsX = 3 * gamePanel.getScale();
+        int boundsY = 10 * gamePanel.getScale();
+        int boundsW = gamePanel.getTileSize() - (3 * gamePanel.getScale() * 2);
+        int boundsH = gamePanel.getTileSize() - (10 * gamePanel.getScale());
 
         collisionBounds = new Rectangle(boundsX, boundsY, boundsW, boundsH);
     }
@@ -86,7 +90,7 @@ public class Player extends Entity {
             moveLeft[3] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/walkleft4.png")));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.severe(e.toString());
         }
     }
 
@@ -181,7 +185,7 @@ public class Player extends Entity {
         }
 
         // Draw the appropriate image on screen.
-        g2.drawImage(image, screenX, screenY, ScreenVar.TILE_SIZE.getValue(), ScreenVar.TILE_SIZE.getValue(), null);
+        g2.drawImage(image, screenX, screenY, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
 
     }
 

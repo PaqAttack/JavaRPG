@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-08-13T15:49:36.686588300Z</date>
+  <millis>1660405776686</millis>
+  <nanos>588300</nanos>
+  <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>core.GamePanel</class>
+  <method>loadGameProperties</method>
+  <thread>1</thread>
+  <message>Properties file successfully loaded.</message>
+</record>
+</log>

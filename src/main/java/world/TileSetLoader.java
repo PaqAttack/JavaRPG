@@ -11,13 +11,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TileSetLoader {
 
     private final ArrayList<TileSet> tileSets;
+    private int tileSize;
 
-    public TileSetLoader() {
+    public TileSetLoader(int tileSize) {
+        this.tileSize = tileSize;
         tileSets = new ArrayList<>();
     }
 
@@ -80,7 +81,8 @@ public class TileSetLoader {
                 Integer.parseInt(jsonObj.get("tileheight").toString()),
                 Integer.parseInt(jsonObj.get("tilewidth").toString()),
                 Integer.parseInt(jsonObj.get("imageheight").toString()),
-                Integer.parseInt(jsonObj.get("imagewidth").toString())
+                Integer.parseInt(jsonObj.get("imagewidth").toString()),
+                tileSize
         ));
 
         // Create an array from the tiles element of the JSON file.

@@ -5,21 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48d146b1-f958-4ebb-869a-b6c2ae2a8817" name="Changes" comment="Added Documentation.">
+      <change afterPath="$PROJECT_DIR$/LogFile.Log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Properties.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/core/LogTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/JSON tilesheets/tree.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/tilesheets/tree.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/CollisionChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/KeyHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/ScreenVar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/WorldVar.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/map/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Layer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/map/MapTileSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tiles/AnimationFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/AnimationFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tiles/TileSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/world/MapLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/world/MapManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worldManagement/TileSetLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/world/TileSetLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/world/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/world/MapLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/world/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/world/MapManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/world/TileSetLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/world/TileSetLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON maps/FlowingWaterMap.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON maps/FlowingWaterMap.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,12 +59,18 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Christopher Paquin/eclipse-workspace/JavaRPGwJSONLoading/src/main/resources/JSON maps&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Christopher Paquin\eclipse-workspace\JavaRPGwJSONLoading\src\main\resources\JSON maps" />
+      <recent name="C:\Users\Christopher Paquin\eclipse-workspace\JavaRPGwJSONLoading\src\main\resources\JSON tilesheets" />
+      <recent name="C:\Users\Christopher Paquin\eclipse-workspace\JavaRPGwJSONLoading\src\main\resources\tilesheets" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Christopher Paquin\eclipse-workspace\JavaRPGwJSONLoading\src\main\resources\JSON tilesheets" />
       <recent name="C:\Users\Christopher Paquin\eclipse-workspace\JavaRPGwJSONLoading\src\main\resources\tilesheets" />
@@ -68,10 +79,11 @@
       <recent name="C:\Users\Christopher Paquin\eclipse-workspace\JavaRPG\src\main\resources\tilesheets" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="core.Main" />
       <module name="JavaRPG" />
+      <option name="PROGRAM_PARAMETERS" value="-ClearLog" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="core.*" />
@@ -82,37 +94,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MapLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="world.MapLoader" />
-      <module name="JavaRPG" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="world.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TileSetLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="world.TileSetLoader" />
-      <module name="JavaRPG" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="world.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.worldManagement.TileSetLoader" />
-        <item itemvalue="Application.worldManagement.MapLoader" />
       </list>
     </recent_temporary>
   </component>
@@ -195,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659649544305</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added Documentation.">
+      <created>1659785483107</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1659785483107</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -5,6 +5,11 @@ import world.MapManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -13,16 +18,53 @@ public class GamePanel extends JPanel implements Runnable {
     private Player player;
     private CollisionChecker collisionChecker;
 
+    private int origTileSize;
+    private int scale;
+    private int tileSize;
+    private int screenCols;
+    private int screenRows;
+    private int screenWidth;
+    private int screenHeight;
+
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     // Create and setup game panel object
     public GamePanel() {
-        this.setPreferredSize(new Dimension(ScreenVar.SCREEN_WIDTH.getValue(), ScreenVar.SCREEN_HEIGHT.getValue()));
+        LogTest.setupLogger();
+
+        // Load game Properties
+        loadGameProperties();
+
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+        this.setFocusable(true);
 
         // De-clutters this method. Creates the player, map manager and collision checker.
         createInitialGameObjects();
+    }
+
+    private void loadGameProperties() {
+        Properties properties = new Properties();
+
+        try (FileInputStream fileInputStream = new FileInputStream("src/Properties.properties")){
+            properties.load(fileInputStream);
+            logger.log(Level.INFO, "Properties file successfully loaded.");
+        } catch (IOException e) {
+            logger.log(Level.INFO, "Properties file failed to load.");
+            logger.log(Level.SEVERE, e.toString());
+            e.printStackTrace();
+        }
+
+        origTileSize = Integer.parseInt(properties.getProperty("DefaultTileSize"));
+        scale = Integer.parseInt(properties.getProperty("Scale"));
+        tileSize = origTileSize * scale;
+        screenCols = Integer.parseInt(properties.getProperty("ScreenColumns"));
+        screenRows = Integer.parseInt(properties.getProperty("ScreenRows"));
+        screenWidth = screenCols * tileSize;
+        screenHeight = screenRows * tileSize;
     }
 
     /**
@@ -30,14 +72,14 @@ public class GamePanel extends JPanel implements Runnable {
      */
     private void createInitialGameObjects() {
         // Create the player
-        int startTileRow = ScreenVar.TILE_SIZE.getValue() * 5;
-        int startTileCol = ScreenVar.TILE_SIZE.getValue() * 5;
+        int startTileRow = tileSize * 5;
+        int startTileCol = tileSize * 5;
         player = new Player(this, keyHandler, startTileCol, startTileRow, 250);
 
         // Creates the Tile Manager
         // The map that will load on game start.
         String startingMapFileName = "FlowingWaterMap.json";
-        mapManager = new MapManager(startingMapFileName, player);
+        mapManager = new MapManager(this, startingMapFileName, player);
 
         // Creates Collision Checker
         collisionChecker = new CollisionChecker(this);
@@ -162,4 +204,31 @@ public class GamePanel extends JPanel implements Runnable {
         return collisionChecker;
     }
 
+    public int getOrigTileSize() {
+        return origTileSize;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public int getTileSize() {
+        return tileSize;
+    }
+
+    public int getScreenCols() {
+        return screenCols;
+    }
+
+    public int getScreenRows() {
+        return screenRows;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
 }

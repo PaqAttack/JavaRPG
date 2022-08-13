@@ -4,8 +4,13 @@ import tiles.Tile;
 import world.MapManager;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Map {
+
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     private final int height;
     private final int width;
     private Layer[] layers;
@@ -55,9 +60,8 @@ public class Map {
             if (mapMngr.getTileSetByName(mts.getName()).getTiles() != null) {
                 mapTileSet.addAll(mapMngr.getTileSetByName(mts.getName()).getTiles());
             } else {
-                System.out.println("Error in processLayers of map.java");
-                System.out.println("Looking for map tile set name: " + mts.getName());
-                System.out.println("Found: " + mapMngr.getTileSetByName(mts.getName()).getImageFileName());
+                String s = "Looking for map tile set name: " + mts.getName() + "\n" + "Found: " + mapMngr.getTileSetByName(mts.getName()).getImageFileName();
+                logger.info(s);
             }
         }
 
@@ -82,7 +86,7 @@ public class Map {
                     // get the tile ID at specified location
                     int tileID = layer.getMapData()[y][x];
 
-                    // 0 means no data so skip that and if thats not the case then check if given tile ID is walkable.
+                    // 0 means no data so skip that and if that's not the case then check if given tile ID is walkable.
                     if (tileID != 0 && !mapTileSet.get(tileID).isWalkable()) {
 
                         // 0 (default) is walkable and 1 is blocked.

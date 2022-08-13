@@ -4,7 +4,7 @@ import entity.Entity;
 
 public class CollisionChecker {
 
-    private final GamePanel gamepanel;
+    private final GamePanel gamePanel;
 
     /**
      * Class to handle collision checking between various entities and the world
@@ -12,7 +12,7 @@ public class CollisionChecker {
      * @param gamePanel object
      */
     public CollisionChecker(GamePanel gamePanel) {
-        this.gamepanel = gamePanel;
+        this.gamePanel = gamePanel;
     }
 
     /**
@@ -35,16 +35,16 @@ public class CollisionChecker {
         int eBottomWorldY = entity.getWorldY() + entity.getCollisionBoundsY() + entity.getCollisionBoundsHeight();
 
         // represents the column of tiles which contains the left edge of the entity collision bounds
-        int eLeftCol = eLeftWorldX / ScreenVar.TILE_SIZE.getValue();
+        int eLeftCol = eLeftWorldX / gamePanel.getTileSize();
 
         // represents the column of tiles which contains the right edge of the entity collision bounds
-        int eRightCol = eRightWorldX / ScreenVar.TILE_SIZE.getValue();
+        int eRightCol = eRightWorldX / gamePanel.getTileSize();
 
         // represents the row of tiles which contains the top edge of the entity collision bounds
-        int eTopRow = eTopWorldY / ScreenVar.TILE_SIZE.getValue();
+        int eTopRow = eTopWorldY / gamePanel.getTileSize();
 
         // represents the row of tiles which contains the bottom edge of the entity collision bounds
-        int eBottomRow = eBottomWorldY / ScreenVar.TILE_SIZE.getValue();
+        int eBottomRow = eBottomWorldY / gamePanel.getTileSize();
 
         int tile1;
         int tile2;
@@ -57,60 +57,60 @@ public class CollisionChecker {
          */
         switch (entity.getDirection()) {
             case UP -> {
-                eTopRow = (eTopWorldY - Entity.COLLISION_CHECK_DISTANCE) / ScreenVar.TILE_SIZE.getValue();
+                eTopRow = (eTopWorldY - Entity.COLLISION_CHECK_DISTANCE) / gamePanel.getTileSize();
 
                 if (eTopRow <= 0) {
                     entity.setCollisionHappening(true);
                     break;
                 }
 
-                tile1 = gamepanel.getMapManager().getCollisionMap()[eLeftCol][eTopRow];
-                tile2 = gamepanel.getMapManager().getCollisionMap()[eRightCol][eTopRow];
+                tile1 = gamePanel.getMapManager().getCollisionMap()[eLeftCol][eTopRow];
+                tile2 = gamePanel.getMapManager().getCollisionMap()[eRightCol][eTopRow];
 
                 if (tile1 == 1 || tile2 == 1) {
                     entity.setCollisionHappening(true);
                 }
             }
             case DOWN -> {
-                eBottomRow = (eBottomWorldY + Entity.COLLISION_CHECK_DISTANCE) / ScreenVar.TILE_SIZE.getValue();
+                eBottomRow = (eBottomWorldY + Entity.COLLISION_CHECK_DISTANCE) / gamePanel.getTileSize();
 
-                if (eBottomRow >= WorldVar.worldHeight()) {
+                if (eBottomRow >= gamePanel.getMapManager().getCurrentMap().getHeight()) {
                     entity.setCollisionHappening(true);
                     break;
                 }
 
-                tile1 = gamepanel.getMapManager().getCollisionMap()[eLeftCol][eBottomRow];
-                tile2 = gamepanel.getMapManager().getCollisionMap()[eRightCol][eBottomRow];
+                tile1 = gamePanel.getMapManager().getCollisionMap()[eLeftCol][eBottomRow];
+                tile2 = gamePanel.getMapManager().getCollisionMap()[eRightCol][eBottomRow];
 
                 if (tile1 == 1 || tile2 == 1) {
                     entity.setCollisionHappening(true);
                 }
             }
             case RIGHT -> {
-                eRightCol = (eRightWorldX + Entity.COLLISION_CHECK_DISTANCE) / ScreenVar.TILE_SIZE.getValue();
+                eRightCol = (eRightWorldX + Entity.COLLISION_CHECK_DISTANCE) / gamePanel.getTileSize();
 
-                if (eRightCol >= WorldVar.worldWidth()) {
+                if (eRightCol >= gamePanel.getMapManager().getCurrentMap().getWidth()) {
                     entity.setCollisionHappening(true);
                     break;
                 }
 
-                tile1 = gamepanel.getMapManager().getCollisionMap()[eRightCol][eTopRow];
-                tile2 = gamepanel.getMapManager().getCollisionMap()[eRightCol][eBottomRow];
+                tile1 = gamePanel.getMapManager().getCollisionMap()[eRightCol][eTopRow];
+                tile2 = gamePanel.getMapManager().getCollisionMap()[eRightCol][eBottomRow];
 
                 if (tile1 == 1 || tile2 == 1) {
                     entity.setCollisionHappening(true);
                 }
             }
             case LEFT -> {
-                eLeftCol = (eLeftWorldX - Entity.COLLISION_CHECK_DISTANCE) / ScreenVar.TILE_SIZE.getValue();
+                eLeftCol = (eLeftWorldX - Entity.COLLISION_CHECK_DISTANCE) / gamePanel.getTileSize();
 
                 if (eLeftCol <= 0) {
                     entity.setCollisionHappening(true);
                     break;
                 }
 
-                tile1 = gamepanel.getMapManager().getCollisionMap()[eLeftCol][eTopRow];
-                tile2 = gamepanel.getMapManager().getCollisionMap()[eLeftCol][eBottomRow];
+                tile1 = gamePanel.getMapManager().getCollisionMap()[eLeftCol][eTopRow];
+                tile2 = gamePanel.getMapManager().getCollisionMap()[eLeftCol][eBottomRow];
 
                 if (tile1 == 1 || tile2 == 1) {
                     entity.setCollisionHappening(true);

@@ -1,24 +1,31 @@
 package tiles;
 
-import core.ScreenVar;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TileSet {
+
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     private String image;
     private int tileCount;
     private int columns;
-    private int tileHeight, tileWidth;
-    private int imageHeight, imageWidth;
+    private int tileHeight;
+    private int tileWidth;
+    private int imageHeight;
+    private int imageWidth;
+    private int tileSize;
     private TileData[] tiledata;
     private ArrayList<Tile> tiles;
 
-    public TileSet(String image, int tileCount, int columns, int tileHeight, int tileWidth, int imageHeight, int imageWidth) {
+    public TileSet(String image, int tileCount, int columns, int tileHeight, int tileWidth, int imageHeight, int imageWidth, int tileSize) {
         this.image = image;
         this.tileCount = tileCount;
         this.columns = columns;
@@ -26,6 +33,7 @@ public class TileSet {
         this.tileWidth = tileWidth;
         this.imageHeight = imageHeight;
         this.imageWidth = imageWidth;
+        this.tileSize = tileSize;
 
         tiles = new ArrayList<>();
     }
@@ -92,14 +100,14 @@ public class TileSet {
                     createTile(
                             scaleImage(
                                     img.getSubimage(x * tileWidth, y * tileHeight, tileWidth, tileHeight),
-                                    ScreenVar.TILE_SIZE.getValue(),
-                                    ScreenVar.TILE_SIZE.getValue()));
+                                    tileSize,
+                                    tileSize));
                     curID++;
                 }
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.severe(e.toString());
         }
     }
 
@@ -153,7 +161,7 @@ public class TileSet {
         return imageHeight / tileHeight;
     }
 
-    public ArrayList<Tile> getTiles() {
+    public List<Tile> getTiles() {
         return tiles;
     }
 }

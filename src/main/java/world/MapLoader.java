@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -15,6 +17,9 @@ import java.nio.charset.StandardCharsets;
  * This is currently setup to get map data from the Tiled map editor.
  */
 public class MapLoader {
+
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     String mapFileName;
     String jsonFileText;
     Gson gson;
@@ -31,7 +36,11 @@ public class MapLoader {
         gson = new Gson();
 
         // Creates the Map Object.
-        loadedMap = gson.fromJson(jsonFileText, Map.class);
+        try {
+            loadedMap = gson.fromJson(jsonFileText, Map.class);
+        } catch (Exception e) {
+            logger.severe(e.toString());
+        }
     }
 
     /**
@@ -57,7 +66,7 @@ public class MapLoader {
             return sb.toString();
 
         } catch (IOException e) {
-            // Say NO to IOExceptions!
+            logger.severe(e.toString());
             e.printStackTrace();
         }
         return null;

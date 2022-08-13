@@ -1,6 +1,6 @@
 package world;
 
-import core.ScreenVar;
+import core.GamePanel;
 import entity.Player;
 import map.Layer;
 import map.Map;
@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class MapManager {
 
+    private GamePanel gamePanel;
     private TileSetLoader tilesetLoader;
     private MapLoader mapLoader;
     private final Player player;
@@ -27,11 +28,15 @@ public class MapManager {
     private ArrayList<TileSet> tileSets;
     private Map currentMap;
 
-    private final int tileSize = ScreenVar.TILE_SIZE.getValue();
+    private String jsonMapPath = "/JSON maps/";
+    private int tileSize;
 
-    public MapManager(String startingMap, Player player) {
+    public MapManager(GamePanel gamePanel, String startingMap, Player player) {
+        this.gamePanel = gamePanel;
+        tileSize = gamePanel.getTileSize();
+
         // Get tileset loader ready
-        tilesetLoader = new TileSetLoader();
+        tilesetLoader = new TileSetLoader(gamePanel.getTileSize());
         this.player = player;
 
         // Load every tileset in resources.
@@ -45,8 +50,28 @@ public class MapManager {
 
         // HANDLE MAP
         // Load up starting map
-        String jsonMapPath = "/JSON maps/";
         mapLoader = new MapLoader(jsonMapPath + startingMap);
+
+        // Save current map for easy access.
+        currentMap = mapLoader.getMap();
+
+        // Process Layers
+        currentMap.processLayers(this);
+
+        // Create Single map
+        concatImage(currentMap);
+
+        // Delete mapLoader when no longer necessary
+        mapLoader = null;
+    }
+
+    /**
+     * Loads a new map. NOT YET TESTED
+     * @param mapToLoad File name of new map file to load. (JSON)
+     */
+    public void loadNewMap(String mapToLoad) {
+        // Load up new map
+        mapLoader = new MapLoader(jsonMapPath + mapToLoad);
 
         // Save current map for easy access.
         currentMap = mapLoader.getMap();
@@ -67,7 +92,7 @@ public class MapManager {
      * @param map Map to use as a source for the new image.
      */
     private void concatImage(Map map) {
-        BufferedImage concatImage = new BufferedImage(map.getWidth() * ScreenVar.TILE_SIZE.getValue(), map.getHeight() * ScreenVar.TILE_SIZE.getValue(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage concatImage = new BufferedImage(map.getWidth() * gamePanel.getTileSize(), map.getHeight() * gamePanel.getTileSize(), BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = concatImage.createGraphics();
 
         // Cycle through all layers
@@ -86,7 +111,7 @@ public class MapManager {
 
                             // If a tile is not animated draw it onto the new image.
                             if (!map.getMapTileSet().get(tileID).hasAnimation()) {
-                                g2d.drawImage(map.getMapTileSet().get(tileID).getImage(), x * ScreenVar.TILE_SIZE.getValue(), y * ScreenVar.TILE_SIZE.getValue(), null);
+                                g2d.drawImage(map.getMapTileSet().get(tileID).getImage(), x * gamePanel.getTileSize(), y * gamePanel.getTileSize(), null);
                             } else {
 
                                 // it has an animation so add it to the list of animated tiles.
@@ -137,6 +162,7 @@ public class MapManager {
                 tilesetLoader.loadTileSet(jsonRSSTilesheetPath + listOfFiles[i].getName());
             }
         }
+        System.out.println("DEBUG");
     }
 
     /**
